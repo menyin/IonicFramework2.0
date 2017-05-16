@@ -1,2 +1,49 @@
 框架：
- 1.UI层：目录views  命名
+ 1.CSS:
+   目录名：css
+   文件名：【父模块名】_【子模块名】.css
+   文件内容：具体页面样式文件或公共样式文件
+   css规约：对于具体的页面的样式的选择器均已页面里的id选择器开头，即 #【父模块名】_【子模块名】 ....{color:red;}
+
+ 2.UI层：
+   目录名：views  
+   文件名：【父模块名】_【子模块名】.html
+   文件内容：具体页面模板文件或公共模板文件
+   UI规约：在根节点均用<ion-view></ion-view>包裹，其id均为文件名，即id="【父模块名】_【子模块名】"
+
+ 3.Controller层
+   目录名：controllers  
+   文件名：【父模块名】_【子模块名】_ctrl.js
+   文件内容：具体页模板页面对应控制器
+   Controller规约：
+     1.文件内声明一个与文件名同名的angular模块，即【父模块名】_【子模块名】_ctrl。
+     2.angular模块内包含的控制器命名规则为：【父模块名】_【子模块名】_act。
+     3.在模块声明处加载相应css、插件js、bll服务js，甚至是common服务js
+     4.在控制器里只需做数据模型$scope数据绑定，和从bll层获取数据工作
+     ？？对于类似tabs.account和tabs.home这种同属一个业务模块下的是否写在同一个模块文件下
+
+ 4.bll层
+
+ 5.dao层
+
+ 6.common层
+
+ 7.config配置
+
+ 8.route和拦截器
+
+ 9.app启动
+
+
+
+
+*angular按需加载js css问题   
+  参考http://blog.csdn.net/lemon_zhao/article/details/52328843    http://www.cnblogs.com/zhangdi/p/4026301.html   
+  ocLazyLoad 
+    官网http://dreamapple.leanapp.cn/gitbook/oclazyload-doc/quick-start/quick-start.html
+    示例http://www.cnblogs.com/BestMePeng/p/AngularJS_ocLazyLoad.html
+  最终采用ocLazyLoad插件进行按需加载
+
+*http状态码 http://www.educity.cn/wenda/134747.html  
+
+?angular在页面中嵌入其他页面,用ng-include

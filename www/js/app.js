@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'route'])//,'ionicLazyLoad','ngCordova' //ngCordova需要在打包APP时才会注入，webapp需先去掉。
+angular.module('starter', ['ionic','oc.lazyLoad', 'route','coms'])//,'ionicLazyLoad','ngCordova' //ngCordova需要在打包APP时才会注入，webapp需先去掉。
   .run(function ($ionicPlatform) {
 
     /*ionic平台设备配置*/

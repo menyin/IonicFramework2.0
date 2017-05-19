@@ -1,27 +1,22 @@
 /**
  * Created by CNY on 2017/5/17.
  */
-angular.module('coms'
-  , [{files: [], cache: false}])
+angular.module('coms',[])
   .factory('func_com', [function () {
-    return
-    {
-      parseInt:function (obj) {
-        return parseInt(obj);
+    return {
+      parseInt:function(obj) { return parseInt(obj);
       }
-    }
+    };
   }])
   .factory('valid_com', [function () {
-    return
-    {
+    return {
       isNum:function (obj) {
         return typeof(obj) == 'Number';
       }
     }
   }])
   .factory('enum_com', [function () {
-    return
-    {
+    return{
       http:new Enum([
         /*常规响应码*/
         {name:'OK',val:'200',msg:'成功'},//服务器已成功处理了请求。通常，这表示服务器提供了请求的网页。
@@ -42,8 +37,7 @@ angular.module('coms'
     }
   }])
   .factory('token_com',[function(){
-    return
-    {
+    return{
       get:function(){
       return localStorage.getItem('token');
       },
@@ -77,12 +71,8 @@ function Enum(aParm){
   }
 }
 
-
 /*
-function Person() {
-  var age = new Date().getFullYear() - 18;
-  Object.defineProperty(this, "age", {
-    get: function () { alert("内部存储数据为:" + age); return new Date().getFullYear() - age; },
-    set: function (value) { age = value; }
-  });
-}*/
+var enumDemo=new Enum([
+     {name:'OK',val:111,msg:'成功'}
+    ])
+alert(enumDemo.OK==111);*/

@@ -3,13 +3,20 @@
  */
 angular.module('user_bll'
   ,[{files:[
-   'daos/dao.js'
+   'daos/daos.js'
   ],cache:false
   }])
-  .factory('user_ser',['ser_api',function (ser_api) {
+  .factory('user_ser',['ser_dao','$q',function (ser_dao,$q) {
     return{
       getUserData: function () {
-         ser_api.get('/User/Post',{});
+        var def=$q.defer();
+        ser_dao.get('/User/Post',123456)
+          .then(function (success) {
+            def.resolve(success);
+          }, function (error) {
+            def.reject(error);
+          });
+        return def.promise;
       }
     }
   }]);

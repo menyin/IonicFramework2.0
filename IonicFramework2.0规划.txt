@@ -35,11 +35,11 @@
 
  5.数据层
    目录名：daos  
-   文件名：dao.js、device.js
+   文件名：dao.js
    文件内容：为数据服务层提供数据请求接口，包含向后端服务器或手机设备请求数据的方法和基本加载动画和错误UI处理
    数据层规约：
-     1.dao.js文件内声明一个与文件名同名的angular模块dao。device.js文件内声明一个与文件名同名的angular模块device。
-     2.dao模块内包含接口服务命名规则为：ser_api。device模块内包含接口服务命名规则为：dev_api。
+     1.dao.js文件内声明一个与文件名同名的angular模块dao。
+     2.dao模块内包含数据接口服务命名规则为：ser_dao和设备接口服务dev_dao
      3.一般情况下，一个angular模块只包含一个接口服务。如当前业务服务结构层次多，可多添加几个接口服务(不推荐)。
      
  6.工具层
@@ -68,6 +68,7 @@
    启动层规约：  
      1.文件内声明一个名为starter的angular模块。
      2.该模块为启动模块，必须在启动页面引入ng-app="starter" 
+     3.对于dao层会引用到的主域地址字符串配置在该启动模块的constant中
 
 规约：
  1.各种文件名、css类名、模块名、控制器名等按【父模块名】_【子模块名】_【功能名】规则命名。
@@ -97,3 +98,19 @@
 ？？对于类似tabs.account和tabs.home这种同属一个业务模块下的是否写在同一个模块文件下
 
 *angular模块有无继承
+
+ NOT_FOUND(404, "{0}未找到"),
+    DATA_ACCESS_FAILED(433, "数据访问错误"),
+    INVALID_PARAM(400, "参数错误"),
+    INTERNAL_ERROR(500, "服务器繁忙，请稍后再试"),
+    UNAUTHORIZED(413, "请先登录"),
+    INVALID_MOBILE(422,"手机号不正确"),
+    INVALID_PATH(403,"访问地址非法"),
+    MODIFY_FAIL(422,"修改失败"),
+    VERIFY_CODE_ERR(423,"验证码错误"),
+    IDENTITY_ERR(424,"身份有错，可能是超时"),
+    DATA_NOT_FOUND(425,"没有数据"),
+    ORIGINAL_PWD_ERR(426,"输入的原密码错误"),
+    NOT_FOUND_USER(427,"找不到用户"),
+    ACTOIN_FAIL(428,"操作失败"),
+    PWD_MODIFY_FAIL(423,"修改密码失败");

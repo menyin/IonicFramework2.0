@@ -76,7 +76,7 @@
  3.创建基本的页面可使用定制的工具IonicProjectTool.exe（还未做出来）
  4.js注释严格采用jsdoc规范进行。
  5.函数或方法返回值采用统一数据格式或promise A+规范
- 4.模块按需加载(AMD)使用ocLazyLoad插件，可加载css文件、普通js文件、内含angular模块js文件，具体是在模块引用内采用以下方式引用
+ 6.模块按需加载(AMD)使用ocLazyLoad插件，可加载css文件、普通js文件、内含angular模块js文件，具体是在模块引用内采用以下方式引用
    angular.module('tabs.account',
    [{  files: [
     'test.css',
@@ -84,7 +84,8 @@
     'services/test.service.js'
     ], cache: false
    }]
- 5.？？？压缩规范：如果是打包到APP则js文件合并与否对于性能影响不大，如果是作为webapp使用浏览器访问，则控制器、业务服务、数据服务的加载文件需要合并压缩。
+ 7.？？？压缩规范：如果是打包到APP则js文件合并与否对于性能影响不大，如果是作为webapp使用浏览器访问，则控制器、业务服务、数据服务的加载文件需要合并压缩。
+ 8.所有第三方js插件通过bower或npm下载，并且保存到对应的配置json。如 npm install jquery -save或bower install swiper -save
 
 
 *angular按需加载js css问题   

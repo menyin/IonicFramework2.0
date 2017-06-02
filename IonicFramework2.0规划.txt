@@ -87,9 +87,17 @@
  7.？？？压缩规范：如果是打包到APP则js文件合并与否对于性能影响不大，如果是作为webapp使用浏览器访问，则控制器、业务服务、数据服务的加载文件需要合并压缩。
  8.所有第三方js插件通过bower或npm下载，并且保存到对应的配置json。如 npm install jquery -save或bower install swiper -save
 
+*权限架构
+ 1.权限包括url访问权限(即使路由权限)、数据访问权限(Ajax请求权限)；
+ 2.所有以上2部分权限中，url权限明文形式保存于token中。数据权限通过加密保存在token中。
+ 3.前段route请求时，通过token中url权限明文进行过滤。  dao层进行ajax请求时携带token到后端接口，后端对token中数据权限进行解密后做相应过滤并响应。
+ 注意：在前端做url权限过滤并非安全的，本权限架构也只能保证数据的相对安全性。
+ 
+ token实现相关文章http://blog.csdn.net/ma_jiang/article/details/68923295    http://www.cnblogs.com/grissom007/p/6294746.html
+  
 
 *angular按需加载js css问题   
-  参考http://blog.csdn.net/lemon_zhao/article/details/52328843    http://www.cnblogs.com/zhangdi/p/4026301.html   
+  参考http://blog.csdn.net/lemon_zhao/article/details/52328843    http://www.cnblogs.com/zhangdi/p/4026301.html   http://blog.csdn.net/smartsmile2012/article/details/52936011
   ocLazyLoad 
     官网http://dreamapple.leanapp.cn/gitbook/oclazyload-doc/quick-start/quick-start.html
     示例http://www.cnblogs.com/BestMePeng/p/AngularJS_ocLazyLoad.html
@@ -100,20 +108,4 @@
 *angular在页面中嵌入其他页面,用ng-include
 ？？对于类似tabs.account和tabs.home这种同属一个业务模块下的是否写在同一个模块文件下
 
-*angular模块有无继承
-
- NOT_FOUND(404, "{0}未找到"),
-    DATA_ACCESS_FAILED(433, "数据访问错误"),
-    INVALID_PARAM(400, "参数错误"),
-    INTERNAL_ERROR(500, "服务器繁忙，请稍后再试"),
-    UNAUTHORIZED(413, "请先登录"),
-    INVALID_MOBILE(422,"手机号不正确"),
-    INVALID_PATH(403,"访问地址非法"),
-    MODIFY_FAIL(422,"修改失败"),
-    VERIFY_CODE_ERR(423,"验证码错误"),
-    IDENTITY_ERR(424,"身份有错，可能是超时"),
-    DATA_NOT_FOUND(425,"没有数据"),
-    ORIGINAL_PWD_ERR(426,"输入的原密码错误"),
-    NOT_FOUND_USER(427,"找不到用户"),
-    ACTOIN_FAIL(428,"操作失败"),
-    PWD_MODIFY_FAIL(423,"修改密码失败");
+?angular模块有无继承

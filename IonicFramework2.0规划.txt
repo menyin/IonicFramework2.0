@@ -45,12 +45,19 @@
  6.工具层
    目录名：js
    文件名：coms.js
-   文件内容：包含各种公共函数的聚合，以angular服务形式出现。如：token管理、常用处理函数、http响应码枚举
+   文件内容：包含各种公共函数的聚合，以angular服务出现。如：token管理、常用处理函数、http响应码枚举、弹出框
    工具层规约：
      1.文件内声明一个与文件名同名的angular模块coms。
      2.模块coms下包含多个angular服务，命名规则为【功能名】_tool
 
-    
+ 7.组件层
+   目录名：js
+   文件名：cpts.js
+   文件内容：包含各种组件的聚合，以angular指令、过滤器、服务形式出现。如：表单验证指令和input格式化指令、anggular过滤器
+   工具层规约：(考虑要不要讲弹出框部分放在这层)
+     1.文件内声明一个与文件名同名的angular模块cpts
+     2.模块coms下包含多个angular指令，命名规则为
+
  7.路由层
    目录名：js
    文件名：route.js
@@ -86,6 +93,7 @@
    }]
  7.？？？压缩规范：如果是打包到APP则js文件合并与否对于性能影响不大，如果是作为webapp使用浏览器访问，则控制器、业务服务、数据服务的加载文件需要合并压缩。
  8.所有第三方js插件通过bower或npm下载，并且保存到对应的配置json。如 npm install jquery -save或bower install swiper -save
+ 9.所有angular组件动画及页面切换动画均在animation.css里定义。 页面切换动画即在目标页面定义显示的animation类样式
 
 *权限架构
  1.权限包括url访问权限(即使路由权限)、数据访问权限(Ajax请求权限)；
@@ -109,3 +117,35 @@
 ？？对于类似tabs.account和tabs.home这种同属一个业务模块下的是否写在同一个模块文件下
 
 ?angular模块有无继承
+
+*ocLazyLoad插件使用注意事项：
+ 1.单独配合angular使用时，在控制器加载时，要在回调中获取加载模块的服务，例如：
+    module1.controller('act1', ['$scope','$ocLazyLoad','$injector',function($scope,$ocLazyLoad,$injector){
+        $ocLazyLoad.load('js/test.js').then(function() {
+            alert(' 成功');
+            var funcCom = $injector.get('funcCom');//获取加载模块相应的服务
+            funcCom.testFunc();
+        }, function (e) {
+            alert('失败');
+        });
+    }]);
+ 2.单独配合angular使用时，在模块中预加载所需模块必须注意同级目录加./，例如：
+    angular.module('test', [{
+      files: [
+        './js/filterModule.js'
+      ],
+      cache: false
+    }])
+ 3.应用页面的启动模块不能使用第2个注意事项中的方式来加载模块，因为在模块中并未注入插件的oc.lazyLoad模块。 
+   所以无论PC或App架构时，启动模块一般不包含功能性代码，而只做各个功能模块引入和公共模块引入及公共配置
+
+
+？问题集锦：
+ 1.页面如何定义平滑优美的转场动画。
+   html层面：在a标签里添加 nav-direction="back|forward"； 在目标页面根元素Dom添加animation.css相关类样式
+   js层面：$state.go()或 $ionicHistory.goBack();之类的跳转操作后面加上 $ionicViewSwitcher.nextDirection("back")或 $ionicViewSwitcher.nextDirection("forwoard")
+   
+ 2.要有底部tab按钮组，但页面没有对应的按钮在按钮组里，怎么实现。
+ 3.Android返回键事件注册
+
+  

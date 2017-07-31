@@ -49,12 +49,29 @@ angular.module('coms',[])
       }
     }
   }])
+/*过滤器 begin*/
+//筛选数组中年龄>14的对象
+  .filter('age_lg_14', function(){
+    return function(aInput){
+      var aTemp = [];
+      for(var i=0;i<aInput.length;i++) {
+        console.log(aInput[i]);
+        if (aInput[i]['age']>14) {
+          aTemp.push(aInput[i]);
+        }
+      }
+      console.log(aTemp);
+      return aTemp;
+    }
+  });
+/*过滤器 begin*/
 
 
 
-/*枚举类*/
+
+
 /***
- *
+ *自定义枚举类型
  * @param {string} aParm 枚举键值对数组
  * @constructor
  * @demo
